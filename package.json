@@ -1,0 +1,33 @@
+{
+  "name": "@xuqiyong666/single-app-host",
+  "version": "1.0.0",
+  "description": "Explicit-init host bridge for window global, Zustand store, sub-app registry, and router adapter",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "zustand": ">=4.4.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "~5.9.3",
+    "zustand": "^5.0.9"
+  }
+}
