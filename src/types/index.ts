@@ -1,6 +1,8 @@
 export type {
   MicroAppMeta,
   MicroAppPageMeta,
+  MicroAppRouter,
+  MicroAppRouterActions,
   MicroAppRouterState,
   MountMicroAppOptions,
   MountMicroAppResult,

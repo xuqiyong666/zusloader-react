@@ -2,8 +2,8 @@ import type { StoreApi } from 'zustand'
 
 /** MicroApp 路由 store 中仅存的数据（不含 actions） */
 export interface MicroAppRouterState {
-  pageKey: string
-  pageParams: Record<string, string>
+  pageKey?: string
+  pageParams?: Record<string, string>
 }
 
 /** 微应用内页面元信息 */
@@ -22,10 +22,24 @@ export interface MicroAppMeta {
   pageList: MicroAppPageMeta[]
 }
 
+/** 由宿主（或本地开发壳）实现并注入；引用在注入后应保持稳定 */
+export interface MicroAppRouterActions {
+  getAllowedPageKeys: () => ReadonlySet<string>
+  go: (pageKey: string, pageParams?: Record<string, string>) => void
+  setPageParams: (pageParams: Record<string, string>) => void
+  resetToIndex: () => void
+}
+
+/** 宿主注入：zustand store + 路由方法（简写 `store` / `actions`） */
+export interface MicroAppRouter {
+  store: StoreApi<MicroAppRouterState>
+  actions: MicroAppRouterActions
+}
+
 export interface MountMicroAppOptions {
   mountElement: HTMLElement
   microApp: MicroAppMeta
-  routerStore: StoreApi<MicroAppRouterState>
+  router: MicroAppRouter
 }
 
 export interface MountMicroAppResult {
