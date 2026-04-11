@@ -1,7 +1,8 @@
 {
-  "name": "@xuqiyong666/single-app-host",
+  "name": "zusloader",
+  "private": true,
   "version": "1.0.0",
-  "description": "Explicit-init host bridge for window global, Zustand store, sub-app registry, and router adapter",
+  "description": "",
   "license": "ISC",
   "author": "",
   "type": "module",

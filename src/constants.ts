@@ -1,2 +1,2 @@
-/** 默认挂载到 `window` 的属性名；可通过 `initSingleAppHost` 的 `globalKey` 覆盖 */
-export const SINGLE_APP_HOST_DEFAULT_GLOBAL_KEY = '__SingleAppHost__' as const
+/** 默认挂载到 `window` 的属性名；与 manifest 中 `ZUS_LOADER_GLOBAL_KEY` 对齐 */
+export const DEFAULT_ZUS_LOADER_GLOBAL_KEY = '__ZusLoader__' as const
