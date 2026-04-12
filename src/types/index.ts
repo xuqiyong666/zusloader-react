@@ -1,4 +1,5 @@
 export type {
+  MicroAppStatus,
   MicroAppMeta,
   MicroAppPageMeta,
   MicroAppRouter,

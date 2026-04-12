@@ -1,9 +1,19 @@
 import type { StoreApi } from 'zustand'
 
+/** 微应用入口（如 lazy chunk）与 manifest 对齐相关的状态 */
+export type MicroAppStatus = 'idle' | 'loading' | 'ready' | 'error'
+
 /** MicroApp 路由 store 中仅存的数据（不含 actions） */
 export interface MicroAppRouterState {
   pageKey?: string
   pageParams?: Record<string, string>
+  /** 入口加载、就绪等；宿主可不使用，保持 idle 即可 */
+  status: MicroAppStatus
+  /**
+   * 通用文案通道：宿主可优先根据是否有内容决定错误/提示 UI；
+   * 可用于入口配置、chunk 失败、微应用运行期上报等，不与 `status` 强绑定。
+   */
+  errorMsg?: string
 }
 
 /** 微应用内页面元信息 */
@@ -28,6 +38,9 @@ export interface MicroAppRouterActions {
   go: (pageKey: string, pageParams?: Record<string, string>) => void
   setPageParams: (pageParams: Record<string, string>) => void
   resetToIndex: () => void
+  setStatus: (status: MicroAppStatus) => void
+  /** 传入 `undefined` 表示清除文案 */
+  setErrorMsg: (message: string | undefined) => void
 }
 
 /** 宿主注入：zustand store + 路由方法（简写 `store` / `actions`） */
