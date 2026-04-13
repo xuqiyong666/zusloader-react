@@ -1,4 +1,4 @@
 export type * from './types'
 
-import zusloader from './main'
+import zusloader from './zusloader'
 export default zusloader

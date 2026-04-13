@@ -2,7 +2,10 @@ import { DEFAULT_ZUS_LOADER_GLOBAL_KEY } from './constants'
 
 import type { ZusLoaderApi, ZusModule } from './types/zusmodule'
 
-function getBrowserWindow(): Window | undefined {
+// 简化类型处理
+type BrowserWindow = any;
+
+function getBrowserWindow(): BrowserWindow | undefined {
   if (typeof window === 'undefined') {
     return undefined
   }
@@ -42,13 +45,13 @@ export function getOrCreateZusLoaderSingleton(
       'getOrCreateZusLoaderSingleton: no browser `window` (must run in a client environment).'
     )
   }
-  const carrier = win as unknown as Record<string, unknown>
-  const existing = carrier[globalKey] as ZusLoaderApi | undefined
+
+  const existing = win[globalKey] as ZusLoaderApi | undefined
   if (existing && typeof existing.registerZusModule === 'function') {
     return existing
   }
   const api = createZusLoaderApi()
-  carrier[globalKey] = api
+  win[globalKey] = api
   return api
 }
 
