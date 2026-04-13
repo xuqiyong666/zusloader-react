@@ -4,9 +4,13 @@ import type { StoreApi } from 'zustand'
 export type MicroAppStatus = 'idle' | 'loading' | 'ready' | 'error'
 
 /** MicroApp 路由 store 中仅存的数据（不含 actions） */
-export interface MicroAppRouterState {
+export interface MicroAppRouter {
   path: string
   params?: Record<string, string>
+}
+
+export interface MicroAppControlState {
+  router: MicroAppRouter;
   status: MicroAppStatus
   errorMsg?: string
 }
@@ -28,24 +32,24 @@ export interface MicroAppMeta {
 }
 
 /** 由宿主（或本地开发壳）实现并注入；引用在注入后应保持稳定 */
-export interface MicroAppRouterActions {
+export interface MicroAppControlActions {
+  hostNavigate: (path: string, params?: Record<string, string>) => void
   navigate: (path: string, params?: Record<string, string>) => void
-  navigateInside: (path: string, params?: Record<string, string>) => void
   setStatus: (status: MicroAppStatus) => void
   /** 传入 `undefined` 表示清除文案 */
   setErrorMsg: (message: string | undefined) => void
 }
 
 /** 宿主注入：zustand store + 路由方法（简写 `store` / `actions`） */
-export interface MicroAppRouter {
-  store: StoreApi<MicroAppRouterState>
-  actions: MicroAppRouterActions
+export interface MicroAppControlSDK {
+  store: StoreApi<MicroAppControlState>
+  actions: MicroAppControlActions
 }
 
 export interface MountMicroAppOptions {
   mountElement: HTMLElement
   microApp: MicroAppMeta
-  router: MicroAppRouter
+  control: MicroAppControlSDK
 }
 
 export interface MountMicroAppResult {
