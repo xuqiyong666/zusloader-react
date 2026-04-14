@@ -1,5 +1,7 @@
-import type { StoreApi } from 'zustand'
+import type { StoreApi } from 'zustand/vanilla'
 import type {
+  HostSDKBase,
+  MicroAppControlExtraState,
   MicroAppStatus,
   MicroAppControlActions,
   MicroAppControlState,
@@ -20,37 +22,44 @@ function buildPathWithParams(path: string, params: Record<string, string>): stri
   return qs ? `${path}?${qs}` : path
 }
 
-export function createMicroAppControlActions(
-  store: StoreApi<MicroAppControlState>,
-  getHost: GetHostSDK
-): MicroAppControlActions {
-  const hostNavigate: MicroAppControlActions['hostNavigate'] = (
+export function createMicroAppControlActions<
+  THost extends HostSDKBase,
+  TExtraState extends MicroAppControlExtraState = {},
+>(
+  store: StoreApi<MicroAppControlState<TExtraState>>,
+  getHost: GetHostSDK<THost>
+): MicroAppControlActions<THost> {
+  const readHost: MicroAppControlActions<THost>['getHost'] = () => getHost()
+
+  const hostNavigate: MicroAppControlActions<THost>['hostNavigate'] = (
     nextPath,
     nextParams = {}
   ) => {
-    const host = getHost()
+    const host = readHost()
     host.navigate(buildPathWithParams(nextPath, nextParams))
   }
 
-  const navigate: MicroAppControlActions['navigate'] = (
+  const navigate: MicroAppControlActions<THost>['navigate'] = (
     nextPath: string,
     nextParams: Record<string, string> = {}
   ) => {
-    const host = getHost()
+    const host = readHost()
+    const { basePath } = store.getState()
     const microPath = normalizeMicroPath(nextPath)
-    const target = microPath ? `${host.basePath}/${microPath}` : host.basePath
+    const target = microPath ? `${basePath}/${microPath}` : basePath
     host.navigate(buildPathWithParams(target, nextParams))
   }
 
   const setStatus: MicroAppControlActions['setStatus'] = (status: MicroAppStatus) => {
-    store.setState({ status })
+    store.setState((s) => ({ ...s, status }))
   }
 
   const setErrorMsg: MicroAppControlActions['setErrorMsg'] = (message) => {
-    store.setState({ errorMsg: message })
+    store.setState((s) => ({ ...s, errorMsg: message }))
   }
 
   return {
+    getHost: readHost,
     hostNavigate,
     navigate,
     setStatus,

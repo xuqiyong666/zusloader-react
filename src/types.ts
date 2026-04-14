@@ -1,4 +1,6 @@
 import type {
+  HostSDKBase,
+  MicroAppControlExtraState,
   MicroAppStatus,
   MicroAppControlActions,
   MicroAppMeta,
@@ -9,6 +11,8 @@ import type {
 import type { NavigateFunction } from './navigateTypes'
 
 export type {
+  HostSDKBase,
+  MicroAppControlExtraState,
   MicroAppStatus,
   MicroAppControlActions,
   MicroAppControlSDK,
@@ -22,16 +26,23 @@ export type {
   NavigateTo,
 } from './navigateTypes'
 
-export type MicroAppControlContextValue = MicroAppControlSDK
+export type MicroAppControlContextValue<
+  THost extends HostSDKBase = HostSDK,
+  TExtraState extends MicroAppControlExtraState = {},
+> = MicroAppControlSDK<THost, TExtraState>
 
-export interface HostSDK {
+export interface HostSDK extends Omit<HostSDKBase, 'navigate'> {
   navigate: NavigateFunction
-  basePath: string
 }
 
-export type GetHostSDK = () => HostSDK
+export type GetHostSDK<THost extends HostSDKBase = HostSDK> = () => THost
 
-export interface CreateMicroAppControlSDKOptions {
+export interface CreateMicroAppControlSDKOptions<
+  THost extends HostSDKBase = HostSDK,
+  TExtraState extends MicroAppControlExtraState = {},
+> {
   microApp: MicroAppMeta
-  getHost: GetHostSDK
+  basePath: string
+  getHost: GetHostSDK<THost>
+  initialState?: TExtraState
 }

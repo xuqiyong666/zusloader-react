@@ -1,18 +1,28 @@
 import { useContext, useMemo, type ReactNode } from 'react'
 
-import type { MicroAppControlSDK } from '@xuqiyong666/zusloader'
+import type {
+  HostSDKBase,
+  MicroAppControlExtraState,
+  MicroAppControlSDK,
+} from '@xuqiyong666/zusloader'
 
 import { MicroAppControlContext } from './MicroAppControlContext'
 import type { MicroAppControlContextValue } from './types'
 
-interface ProviderProps {
-  control: MicroAppControlSDK
+interface ProviderProps<
+  THost extends HostSDKBase = HostSDKBase,
+  TExtraState extends MicroAppControlExtraState = {},
+> {
+  control: MicroAppControlSDK<THost, TExtraState>
   children: ReactNode
 }
 
-export function MicroAppControlProvider({ control, children }: ProviderProps) {
+export function MicroAppControlProvider<
+  THost extends HostSDKBase = HostSDKBase,
+  TExtraState extends MicroAppControlExtraState = {},
+>({ control, children }: ProviderProps<THost, TExtraState>) {
   const contextValue = useMemo(
-    (): MicroAppControlContextValue => ({
+    (): MicroAppControlContextValue<THost, TExtraState> => ({
       store: control.store,
       actions: control.actions,
     }),
@@ -26,10 +36,13 @@ export function MicroAppControlProvider({ control, children }: ProviderProps) {
   )
 }
 
-export function useMicroAppControl(): MicroAppControlContextValue {
+export function useMicroAppControl<
+  THost extends HostSDKBase = HostSDKBase,
+  TExtraState extends MicroAppControlExtraState = {},
+>(): MicroAppControlContextValue<THost, TExtraState> {
   const ctx = useContext(MicroAppControlContext)
   if (!ctx) {
     throw new Error('useMicroAppControl must be used within MicroAppControlProvider')
   }
-  return ctx
+  return ctx as unknown as MicroAppControlContextValue<THost, TExtraState>
 }
