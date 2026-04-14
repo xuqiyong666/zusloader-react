@@ -1,4 +1,4 @@
-import type { MicroAppControlSDK } from 'zusloader'
+import type { MicroAppControlSDK } from '@xuqiyong666/zusloader'
 
 import { createMicroAppControlActions } from './createMicroAppControlActions'
 import { createMicroAppControlStore } from './createMicroAppControlStore'

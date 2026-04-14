@@ -1,7 +1,7 @@
 import { createStore } from 'zustand/vanilla'
 import type { StoreApi } from 'zustand'
 
-import type { MicroAppControlState, MicroAppRouter } from 'zusloader'
+import type { MicroAppControlState, MicroAppRouter } from '@xuqiyong666/zusloader'
 
 export function createMicroAppControlStore(
   initial: Partial<MicroAppRouter>

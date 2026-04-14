@@ -1,6 +1,6 @@
 import { useContext, useMemo, type ReactNode } from 'react'
 
-import type { MicroAppControlSDK } from 'zusloader'
+import type { MicroAppControlSDK } from '@xuqiyong666/zusloader'
 
 import { MicroAppControlContext } from './MicroAppControlContext'
 import type { MicroAppControlContextValue } from './types'

@@ -1,6 +1,5 @@
 {
-  "name": "zusloader-react",
-  "private": true,
+  "name": "@xuqiyong666/zusloader-react",
   "version": "0.0.2",
   "description": "",
   "license": "ISC",
@@ -23,20 +22,16 @@
     "build": "tsup",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
-    "zusloader": "file:../zusloader"
-  },
   "peerDependencies": {
+    "@xuqiyong666/zusloader": "~>0.0.2",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "react-router-dom": ">=7.0.0",
     "zustand": ">=4.4.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.2",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "react-router-dom": ">=7.0.0",
     "tsup": "^8.5.1",
     "typescript": "~5.9.3",
     "zustand": "^5.0.9"

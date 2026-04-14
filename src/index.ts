@@ -7,6 +7,10 @@ export type {
   HostSDK,
   GetHostSDK,
   CreateMicroAppControlSDKOptions,
+  NavigateFunction,
+  NavigateOptions,
+  NavigatePath,
+  NavigateTo,
 } from './types'
 
 export { MicroAppControlContext } from './MicroAppControlContext'

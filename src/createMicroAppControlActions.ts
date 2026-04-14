@@ -3,7 +3,7 @@ import type {
   MicroAppStatus,
   MicroAppControlActions,
   MicroAppControlState,
-} from 'zusloader'
+} from '@xuqiyong666/zusloader'
 
 import type { GetHostSDK } from './types'
 

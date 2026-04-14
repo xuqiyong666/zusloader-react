@@ -9,5 +9,5 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   treeshake: true,
-  external: ['react', 'react-router-dom', 'zustand', 'zusloader'],
+  external: ['react', 'react-dom', '@xuqiyong666/zusloader', 'zustand'],
 })

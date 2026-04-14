@@ -1,11 +1,12 @@
-import type { NavigateFunction } from 'react-router-dom'
 import type {
   MicroAppStatus,
   MicroAppControlActions,
   MicroAppMeta,
   MicroAppControlSDK,
   MicroAppControlState,
-} from 'zusloader'
+} from '@xuqiyong666/zusloader'
+
+import type { NavigateFunction } from './navigateTypes'
 
 export type {
   MicroAppStatus,
@@ -13,6 +14,13 @@ export type {
   MicroAppControlSDK,
   MicroAppControlState,
 }
+
+export type {
+  NavigateFunction,
+  NavigateOptions,
+  NavigatePath,
+  NavigateTo,
+} from './navigateTypes'
 
 export type MicroAppControlContextValue = MicroAppControlSDK
 
