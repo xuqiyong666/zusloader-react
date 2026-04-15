@@ -1,6 +1,6 @@
 {
   "name": "@xuqiyong666/zusloader-react",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "license": "ISC",
   "author": "",
@@ -23,7 +23,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@xuqiyong666/zusloader": "^0.0.3",
+    "@xuqiyong666/zusloader": "^0.0.4",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
     "zustand": ">=4.4.0"
