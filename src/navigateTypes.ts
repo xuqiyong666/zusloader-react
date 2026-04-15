@@ -1,5 +1,5 @@
 /**
- * 与 react-router / react-router-dom 中 `useNavigate()` 返回值结构对齐的本地声明，
+ * 兼容 react-router 的 NavigateFunction（历史保留，不推荐新代码使用）
  * 避免本包对 `react-router-dom` 的运行时/类型依赖。
  * 参考：react-router@7 `NavigateFunction`、`To`、`NavigateOptions`。
  */

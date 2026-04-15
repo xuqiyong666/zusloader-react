@@ -8,8 +8,6 @@ import type {
   MicroAppControlState,
 } from '@xuqiyong666/zusloader'
 
-import type { NavigateFunction } from './navigateTypes'
-
 export type {
   HostSDKBase,
   MicroAppControlExtraState,
@@ -27,18 +25,17 @@ export type {
 } from './navigateTypes'
 
 export type MicroAppControlContextValue<
-  THost extends HostSDKBase = HostSDK,
+  THost extends HostSDKBase = HostSDKBase,
   TExtraState extends MicroAppControlExtraState = {},
 > = MicroAppControlSDK<THost, TExtraState>
 
-export interface HostSDK extends Omit<HostSDKBase, 'navigate'> {
-  navigate: NavigateFunction
-}
+// HostSDK 直接使用 HostSDKBase（基础包已使用简单参数签名）
+export type HostSDK = HostSDKBase
 
-export type GetHostSDK<THost extends HostSDKBase = HostSDK> = () => THost
+export type GetHostSDK<THost extends HostSDKBase = HostSDKBase> = () => THost
 
 export interface CreateMicroAppControlSDKOptions<
-  THost extends HostSDKBase = HostSDK,
+  THost extends HostSDKBase = HostSDKBase,
   TExtraState extends MicroAppControlExtraState = {},
 > {
   microApp: MicroAppMeta
