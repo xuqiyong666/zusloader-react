@@ -44,7 +44,7 @@ export function zusModuleManifestPlugin(options: ZusModuleManifestOptions) {
         return;
       }
 
-      /** @type {Array<{ type: string; href: string; module?: boolean }>} */
+      /** @type {Array<{ type: string; href: string }>} */
       const entries: any[] = [];
 
       /** 入口 chunk 的 importedCss 常为部分子 chunk 持有，故收集本次构建中全部 CSS 产物 */
@@ -63,7 +63,6 @@ export function zusModuleManifestPlugin(options: ZusModuleManifestOptions) {
       entries.push({
         type: "script",
         href: `./${jsName}`,
-        module: true,
       });
 
       const manifest = {

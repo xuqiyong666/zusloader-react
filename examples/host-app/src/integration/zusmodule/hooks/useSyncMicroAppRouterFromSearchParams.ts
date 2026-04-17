@@ -30,6 +30,7 @@ export function useSyncMicroAppRouterFromSearchParams({
     if (cur.router.path === path && shallowEqual(curParams, params)) {
       return;
     }
+
     control.store.setState({ router: { path, params } });
   }, [control, microApp.appKey, microApp.indexPagePath, pagePath, searchParams]);
 

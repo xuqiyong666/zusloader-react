@@ -19,10 +19,6 @@ export default function ZusModuleHostPage() {
     '*'?: string
   }>()
 
-  console.log("render ZusModuleRunner", {
-    paramsAppKey,
-    pagePath
-  })
 
   const { status, zusmodule, errorMessage } = useZusModule({
     zusmodule_manifest_url: DEFAULT_MANIFEST_URL

@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
-import zusloader, { type ZusModule } from '@xuqiyong666/zusloader'
-
-import { loadZusModuleFromManifestUrl } from './zusModuleManifest'
+import {
+  bootstrapZusModuleFromManifestUrl,
+  finalizeZusModuleFromManifestUrl,
+  type ZusModule,
+} from '@xuqiyong666/zusloader'
 
 export type ZusModuleStatus = 'loading' | 'ready' | 'error'
 
@@ -28,7 +30,8 @@ export function useZusModule(options: UseZusModuleOptions): UseZusModuleResult {
   const loadedModuleKeyRef = useRef<string | null>(null)
 
   useEffect(() => {
-    let cancelled = false
+    const controller = new AbortController()
+    const signal = controller.signal
     setStatus('loading')
     setErrorMessage(null)
     setZusmodule(null)
@@ -39,10 +42,7 @@ export function useZusModule(options: UseZusModuleOptions): UseZusModuleResult {
       try {
         let resolvedModuleKey: string | null = null
         if (loadedManifestUrlRef.current !== manifestUrl) {
-          const manifest = await loadZusModuleFromManifestUrl(manifestUrl)
-          if (cancelled) {
-            return
-          }
+          const { manifest } = await bootstrapZusModuleFromManifestUrl(manifestUrl, { signal })
           resolvedModuleKey = manifest.zusmoduleKey ?? null
           loadedManifestUrlRef.current = manifestUrl
           loadedModuleKeyRef.current = resolvedModuleKey
@@ -53,24 +53,13 @@ export function useZusModule(options: UseZusModuleOptions): UseZusModuleResult {
           throw new Error('manifest 中缺少 zusmoduleKey。')
         }
 
-        const registered = zusloader.getRegisteredZusModule(resolvedModuleKey)
-        if (!registered) {
-          throw new Error(
-            `未在 zusloader 中找到模块「${resolvedModuleKey}」，请确认子模块入口已执行 registerZusModule。`
-          )
-        }
-        if (registered.microApps.length === 0) {
-          throw new Error('子模块 microApps 为空，无法挂载。')
-        }
-        if (cancelled) {
-          return
-        }
-        const servedPath = new URL('.', manifestUrl).href
-        registered.updateConfig({ servedPath })
+        const registered = await finalizeZusModuleFromManifestUrl(manifestUrl, resolvedModuleKey, {
+          signal,
+        })
         setZusmodule(registered)
         setStatus('ready')
       } catch (e) {
-        if (cancelled) {
+        if (signal.aborted) {
           return
         }
         loadedManifestUrlRef.current = null
@@ -82,7 +71,7 @@ export function useZusModule(options: UseZusModuleOptions): UseZusModuleResult {
     })()
 
     return () => {
-      cancelled = true
+      controller.abort()
     }
   }, [zusmodule_manifest_url])
 

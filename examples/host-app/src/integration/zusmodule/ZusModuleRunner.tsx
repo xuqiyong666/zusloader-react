@@ -13,16 +13,20 @@ export interface ZusModuleRunnerProps {
 }
 
 /** URL 为唯一事实源：path/search 单向同步到 control.store。 */
-export default function ZusModuleRunner({
-  zusmodule,
-  microApp,
-  basePath,
-  pagePath,
-  rootDomRef,
-}: ZusModuleRunnerProps) {
+export default function ZusModuleRunner(props: ZusModuleRunnerProps) {
+
+  const {
+    zusmodule,
+    microApp,
+    basePath,
+    pagePath,
+    rootDomRef,
+  } = props
+
   const unmountRef = useRef<(() => void) | null>(null);
 
   const { control } = useControlForMicroApp({ microApp, zusmodule, basePath, pagePath });
+
   const searchParamsRef = useSyncMicroAppRouterFromSearchParams({
     control,
     microApp,
@@ -41,7 +45,7 @@ export default function ZusModuleRunner({
     const sp = new URLSearchParams(searchParamsRef.current.toString());
     const { path, params } = urlToRouterPayload(pagePath, sp, microApp.indexPagePath);
     control.store.setState({ router: { path, params } });
-
+  
     const { unmount } = zusmodule.mountMicroApp({
       mountElement: el,
       microApp,
