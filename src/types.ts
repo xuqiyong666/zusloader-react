@@ -1,45 +1,11 @@
-import type {
-  HostSDKBase,
-  MicroAppControlExtraState,
-  MicroAppStatus,
-  MicroAppControlActions,
-  MicroAppMeta,
-  MicroAppControlSDK,
-  MicroAppControlState,
-} from '@xuqiyong666/zusloader'
-
+export * from './controlTypes'
 export type {
-  HostSDKBase,
-  MicroAppControlExtraState,
-  MicroAppStatus,
-  MicroAppControlActions,
-  MicroAppControlSDK,
-  MicroAppControlState,
-}
-
+  UseZusModuleAndMicroAppOptions,
+  UseZusModuleAndMicroAppResult,
+} from './useZusModuleAndMicroApp'
 export type {
-  NavigateFunction,
-  NavigateOptions,
-  NavigatePath,
-  NavigateTo,
-} from './navigateTypes'
-
-export type MicroAppControlContextValue<
-  THost extends HostSDKBase = HostSDKBase,
-  TExtraState extends MicroAppControlExtraState = {},
-> = MicroAppControlSDK<THost, TExtraState>
-
-// HostSDK 直接使用 HostSDKBase（基础包已使用简单参数签名）
-export type HostSDK = HostSDKBase
-
-export type GetHostSDK<THost extends HostSDKBase = HostSDKBase> = () => THost
-
-export interface CreateMicroAppControlSDKOptions<
-  THost extends HostSDKBase = HostSDKBase,
-  TExtraState extends MicroAppControlExtraState = {},
-> {
-  microApp: MicroAppMeta
-  basePath: string
-  getHost: GetHostSDK<THost>
-  initialState?: TExtraState
-}
+  UseZusModuleOptions,
+  UseZusModuleResult,
+  ZusModuleStatus,
+} from './useZusModule'
+export type { ZusModuleManifest } from './zusModuleManifest'

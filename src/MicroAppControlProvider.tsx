@@ -1,48 +1,36 @@
-import { useContext, useMemo, type ReactNode } from 'react'
+import { useContext, type ReactNode } from 'react'
 
-import type {
-  HostSDKBase,
-  MicroAppControlExtraState,
-  MicroAppControlSDK,
-} from '@xuqiyong666/zusloader'
+import type { MicroAppControlSDK } from '@xuqiyong666/zusloader'
 
 import { MicroAppControlContext } from './MicroAppControlContext'
-import type { MicroAppControlContextValue } from './types'
+import type { MicroAppControlContextValue } from './controlTypes'
 
 interface ProviderProps<
-  THost extends HostSDKBase = HostSDKBase,
-  TExtraState extends MicroAppControlExtraState = {},
+  TExtraState extends Record<string, unknown> = {},
+  TExtraActions extends Record<string, unknown> | void = void,
 > {
-  control: MicroAppControlSDK<THost, TExtraState>
+  control: MicroAppControlSDK<TExtraState, TExtraActions>
   children: ReactNode
 }
 
 export function MicroAppControlProvider<
-  THost extends HostSDKBase = HostSDKBase,
-  TExtraState extends MicroAppControlExtraState = {},
->({ control, children }: ProviderProps<THost, TExtraState>) {
-  const contextValue = useMemo(
-    (): MicroAppControlContextValue<THost, TExtraState> => ({
-      store: control.store,
-      actions: control.actions,
-    }),
-    [control.store, control.actions]
-  )
-
+  TExtraState extends Record<string, unknown> = {},
+  TExtraActions extends Record<string, unknown> | void = void,
+>({ control, children }: ProviderProps<TExtraState, TExtraActions>) {
   return (
-    <MicroAppControlContext.Provider value={contextValue}>
+    <MicroAppControlContext.Provider value={control as unknown as MicroAppControlSDK}>
       {children}
     </MicroAppControlContext.Provider>
   )
 }
 
 export function useMicroAppControl<
-  THost extends HostSDKBase = HostSDKBase,
-  TExtraState extends MicroAppControlExtraState = {},
->(): MicroAppControlContextValue<THost, TExtraState> {
+  TExtraState extends Record<string, unknown> = {},
+  TExtraActions extends Record<string, unknown> | void = void,
+>(): MicroAppControlContextValue<TExtraState, TExtraActions> {
   const ctx = useContext(MicroAppControlContext)
   if (!ctx) {
-    throw new Error('useMicroAppControl must be used within MicroAppControlProvider')
+    throw new Error('useMicroAppControl must be used within MicroAppControlContext.Provider')
   }
-  return ctx as unknown as MicroAppControlContextValue<THost, TExtraState>
+  return ctx as unknown as MicroAppControlContextValue<TExtraState, TExtraActions>
 }

@@ -1,10 +1,5 @@
 import { createContext } from 'react'
 
-import type {
-  HostSDKBase,
-  MicroAppControlExtraState,
-} from '@xuqiyong666/zusloader'
-import type { MicroAppControlContextValue } from './types'
+import type { MicroAppControlSDK } from '@xuqiyong666/zusloader'
 
-export const MicroAppControlContext =
-  createContext<MicroAppControlContextValue<HostSDKBase, MicroAppControlExtraState> | null>(null)
+export const MicroAppControlContext = createContext<MicroAppControlSDK | null>(null)
