@@ -1,8 +1,8 @@
 import {
   loadZusModuleManifestResources,
   loadZusModuleFromManifestOrigin as loadZusModuleFromManifestOriginCore,
-  type LoadZusModuleManifestResourcesOptions,
-  type ZusModuleManifest,
+  type TBootstrapLoadOptions,
+  type TManifest,
 } from '@xuqiyong666/zusloader'
 
 /**
@@ -10,8 +10,8 @@ import {
  */
 export async function loadZusModuleFromManifestUrl(
   manifestUrl: string,
-  options?: LoadZusModuleManifestResourcesOptions
-): Promise<ZusModuleManifest> {
+  options?: TBootstrapLoadOptions
+): Promise<TManifest> {
   return loadZusModuleManifestResources(manifestUrl, options)
 }
 
@@ -21,9 +21,9 @@ export async function loadZusModuleFromManifestUrl(
  */
 export async function loadZusModuleFromManifestOrigin(
   origin: string,
-  options?: LoadZusModuleManifestResourcesOptions
-): Promise<ZusModuleManifest> {
+  options?: TBootstrapLoadOptions
+): Promise<TManifest> {
   return loadZusModuleFromManifestOriginCore(origin, options)
 }
 
-export type { ZusModuleManifest }
+export type { TManifest }

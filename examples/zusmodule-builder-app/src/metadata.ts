@@ -1,8 +1,8 @@
 /** 开发壳使用的 MicroApp 登记表（与构建 manifest 可后续对齐） */
 
-import type { MicroAppMeta } from '@xuqiyong666/zusloader'
+import type { TAppMeta } from '@xuqiyong666/zusloader'
 
-export const microApps: MicroAppMeta[] = [
+export const microApps: TAppMeta[] = [
   {
     appKey: 'sample-app-1',
     displayName: 'Sample App 1',
@@ -25,7 +25,7 @@ export const microApps: MicroAppMeta[] = [
 
 export function getMicroAppByKey(
   appKey: string | undefined
-): MicroAppMeta | undefined {
+): TAppMeta | undefined {
   if (!appKey) {
     return undefined
   }

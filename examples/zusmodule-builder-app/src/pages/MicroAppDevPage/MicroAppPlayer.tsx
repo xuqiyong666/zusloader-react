@@ -1,13 +1,13 @@
 import { useLayoutEffect } from 'react'
 
-import type { MicroAppMeta } from '@xuqiyong666/zusloader'
+import type { TAppMeta } from '@xuqiyong666/zusloader'
 import { useMicroAppControl } from '@xuqiyong666/zusloader-react'
 
 import { MicroAppComponent } from './MicroAppComponent.tsx'
 import { type MicroAppLazyRoot } from './microAppLazyRootMap.tsx'
 
 interface Props {
-  microApp: MicroAppMeta
+  microApp: TAppMeta
   lazyRoot: MicroAppLazyRoot | null
 }
 

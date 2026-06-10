@@ -1,5 +1,5 @@
 import { Suspense, useLayoutEffect, type ReactNode } from 'react'
-import type { MicroAppMeta } from '@xuqiyong666/zusloader'
+import type { TAppMeta } from '@xuqiyong666/zusloader'
 import { useMicroAppControl } from '@xuqiyong666/zusloader-react'
 
 import type { MicroAppLazyRoot } from './microAppLazyRootMap.tsx'
@@ -8,7 +8,7 @@ import { LazyCommittedNotifier } from './LazyCommittedNotifier.tsx'
 
 export interface MicroAppComponentProps {
   lazyRoot: MicroAppLazyRoot
-  microApp: MicroAppMeta
+  microApp: TAppMeta
 }
 
 /**

@@ -4,9 +4,9 @@ import zhCN from 'antd/locale/zh_CN'
 import { createRoot } from 'react-dom/client'
 
 import zusloader, {
-  type MountMicroAppOptions,
-  type MountMicroAppResult,
-  type ZusModule,
+  type TMountOptions,
+  type TMountResult,
+  type TZusModule,
 } from '@xuqiyong666/zusloader'
 import { MicroAppControlProvider } from '@xuqiyong666/zusloader-react'
 
@@ -20,8 +20,8 @@ import { ZUS_MODULE_KEY } from '../system/zusmoduleKey.ts'
 
 /** zus-module 宿主挂载入口：不含开发壳 App / react-router，按传入的 MicroApp 挂载 */
 function mountMicroApp(
-  options: MountMicroAppOptions
-): MountMicroAppResult {
+  options: TMountOptions
+): TMountResult {
   const { mountElement, microApp, control } = options
 
   const root = createRoot(mountElement)
@@ -42,7 +42,7 @@ function mountMicroApp(
   }
 }
 
-const zusModule: ZusModule = {
+const zusModule: TZusModule = {
   moduleKey: ZUS_MODULE_KEY,
   displayName: 'Demo ZusModule',
   microApps,

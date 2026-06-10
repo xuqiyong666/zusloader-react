@@ -7,7 +7,8 @@ import { useStore } from 'zustand/react'
 
 import { getMicroAppByKey } from '../../metadata.ts'
 
-import type { MicroAppControlActions, MicroAppControlSDK, MicroAppControlState, MicroAppPageMeta, MicroAppStatus } from '@xuqiyong666/zusloader'
+import type { TPageMeta, TStatus } from '@xuqiyong666/zusloader'
+import type { TControlSDK, TControlState } from '@xuqiyong666/zusloader-react'
 import {
   MicroAppControlProvider,
   useMicroAppControl,
@@ -20,7 +21,7 @@ import { useNavigateForMicroApp } from '../../hooks/useNavigateForMicroApp.ts'
 const { Header, Sider, Content } = Layout
 const { Title, Text, Paragraph } = Typography
 
-function DevSiderMenu({ pageList }: { pageList: MicroAppPageMeta[] }) {
+function DevSiderMenu({ pageList }: { pageList: TPageMeta[] }) {
   const { store, actions } = useMicroAppControl()
   const pagePath = useStore(store, (s) => s.router.path)
 
@@ -63,7 +64,7 @@ export function MicroAppDevPage() {
       return null
     }
 
-    const store = createStore<MicroAppControlState>(() => ({
+    const store = createStore<TControlState>(() => ({
       router: {
         path: microApp.indexPagePath,
         params: {},
@@ -79,13 +80,13 @@ export function MicroAppDevPage() {
       const normalizedPath = nextPath.startsWith('/') ? nextPath : `/${nextPath}`
       navigate(`${basePath}${normalizedPath}`, nextParams)
     }
-    const setStatus = (status: MicroAppStatus) => {
+    const setStatus = (status: TStatus) => {
       store.setState((s) => ({ ...s, status }))
     }
     const setErrorMsg = (message) => {
       store.setState((s) => ({ ...s, errorMsg: message }))
     }
-    const control: MicroAppControlSDK = {
+    const control: TControlSDK = {
       store,
       actions: {
         hostNavigate,

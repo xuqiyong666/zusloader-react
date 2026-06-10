@@ -8,3 +8,9 @@ body,
 #root {
   min-height: 100vh;
 }
+
+.zusmodule-example-host-root {
+  box-sizing: border-box;
+  outline: 1px dashed color-mix(in srgb, var(--ant-color-primary, #1677ff) 35%, transparent);
+  outline-offset: -1px;
+}

@@ -1,36 +1,34 @@
-import { useContext, type ReactNode } from 'react'
+import { useContext, type ReactNode } from 'react';
 
-import type { MicroAppControlSDK } from '@xuqiyong666/zusloader'
-
-import { MicroAppControlContext } from './MicroAppControlContext'
-import type { MicroAppControlContextValue } from './controlTypes'
+import { MicroAppControlContext } from './MicroAppControlContext';
+import type { TControlContextValue, TExtraActions, TExtraState } from './types/control';
 
 interface ProviderProps<
-  TExtraState extends Record<string, unknown> = {},
-  TExtraActions extends Record<string, unknown> | void = void,
+  TState extends TExtraState = TExtraState,
+  TActions extends TExtraActions = TExtraActions,
 > {
-  control: MicroAppControlSDK<TExtraState, TExtraActions>
-  children: ReactNode
+  control: TControlContextValue<TState, TActions>;
+  children: ReactNode;
 }
 
 export function MicroAppControlProvider<
-  TExtraState extends Record<string, unknown> = {},
-  TExtraActions extends Record<string, unknown> | void = void,
->({ control, children }: ProviderProps<TExtraState, TExtraActions>) {
+  TState extends TExtraState = TExtraState,
+  TActions extends TExtraActions = TExtraActions,
+>({ control, children }: ProviderProps<TState, TActions>) {
   return (
-    <MicroAppControlContext.Provider value={control as unknown as MicroAppControlSDK}>
+    <MicroAppControlContext.Provider value={control}>
       {children}
     </MicroAppControlContext.Provider>
-  )
+  );
 }
 
 export function useMicroAppControl<
-  TExtraState extends Record<string, unknown> = {},
-  TExtraActions extends Record<string, unknown> | void = void,
->(): MicroAppControlContextValue<TExtraState, TExtraActions> {
-  const ctx = useContext(MicroAppControlContext)
+  TState extends TExtraState = TExtraState,
+  TActions extends TExtraActions = TExtraActions,
+>(): TControlContextValue<TState, TActions> {
+  const ctx = useContext(MicroAppControlContext);
   if (!ctx) {
-    throw new Error('useMicroAppControl must be used within MicroAppControlContext.Provider')
+    throw new Error('useMicroAppControl must be used within MicroAppControlContext.Provider');
   }
-  return ctx as unknown as MicroAppControlContextValue<TExtraState, TExtraActions>
+  return ctx as TControlContextValue<TState, TActions>;
 }

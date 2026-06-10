@@ -1,12 +1,12 @@
 import { useEffect, useLayoutEffect, useRef, type RefObject } from 'react';
-import type { ZusModule, MicroAppMeta } from '@xuqiyong666/zusloader';
+import type { TAppMeta, TZusModule } from '@xuqiyong666/zusloader';
 import { urlToRouterPayload } from './utils/router';
 import { useControlForMicroApp } from './hooks/useControlForMicroApp';
 import { useSyncMicroAppRouterFromSearchParams } from './hooks/useSyncMicroAppRouterFromSearchParams';
 
 export interface ZusModuleRunnerProps {
-  zusmodule: ZusModule;
-  microApp: MicroAppMeta;
+  zusmodule: TZusModule;
+  microApp: TAppMeta;
   basePath: string;
   pagePath?: string;
   rootDomRef: RefObject<HTMLDivElement | null>;

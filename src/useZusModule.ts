@@ -3,27 +3,21 @@ import { useEffect, useRef, useState } from 'react'
 import {
   bootstrapZusModuleFromManifestUrl,
   finalizeZusModuleFromManifestUrl,
-  type ZusModule,
+  type TZusModule,
 } from '@xuqiyong666/zusloader'
 
-export type ZusModuleStatus = 'loading' | 'ready' | 'error'
-
-export interface UseZusModuleOptions {
-  zusmodule_manifest_url: string
-}
-
-export interface UseZusModuleResult {
-  status: ZusModuleStatus
-  zusmodule: ZusModule | null
-  errorMessage: string | null
-}
+import type {
+  TUseZusModuleOptions,
+  TUseZusModuleResult,
+  TZusModuleStatus,
+} from './types/zusmodule'
 
 /** 按 manifest URL 拉取并执行 zus-module，从 zusloader 取已注册模块。 */
-export function useZusModule(options: UseZusModuleOptions): UseZusModuleResult {
+export function useZusModule(options: TUseZusModuleOptions): TUseZusModuleResult {
   const { zusmodule_manifest_url } = options
 
-  const [status, setStatus] = useState<ZusModuleStatus>('loading')
-  const [zusmodule, setZusmodule] = useState<ZusModule | null>(null)
+  const [status, setStatus] = useState<TZusModuleStatus>('loading')
+  const [zusmodule, setZusmodule] = useState<TZusModule | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const loadedManifestUrlRef = useRef<string | null>(null)

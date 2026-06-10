@@ -2,13 +2,13 @@ import { Alert, Select, Spin } from 'antd';
 
 import { useParams } from 'react-router-dom';
 import { useZusModule } from '@xuqiyong666/zusloader-react';
-import type { ZusModule } from '@xuqiyong666/zusloader';
+import type { TAppMeta, TZusModule } from '@xuqiyong666/zusloader';
 import ZusModuleRunner from '../integration/zusmodule/ZusModuleRunner';
 import { useNavigateForMicroApp } from '../integration/zusmodule/hooks/useNavigateForMicroApp';
 import { useMemo, useRef } from 'react';
 
-const DEFAULT_MANIFEST_URL = 'http://localhost:3000/manifest.json';
-const PREFIX_PATH = '/zus-module'
+const DEFAULT_MANIFEST_URL = 'http://localhost:3000/dist-zusmodule/manifest.json';
+const PREFIX_PATH = '/zusmodule'
 
 export default function ZusModuleHostPage() {
   const navigate = useNavigateForMicroApp()
@@ -18,7 +18,6 @@ export default function ZusModuleHostPage() {
     microAppKey?: string
     '*'?: string
   }>()
-
 
   const { status, zusmodule, errorMessage } = useZusModule({
     zusmodule_manifest_url: DEFAULT_MANIFEST_URL
@@ -39,14 +38,22 @@ export default function ZusModuleHostPage() {
     if (!zusmodule) return null
 
     const handleMicroAppChange = (appKey: string) => {
-      const appPath = `/${PREFIX_PATH}/${appKey}`
-      navigate(appPath)
+      navigate(`${PREFIX_PATH}/${appKey}`)
+    }
+
+    const handlePageChange = (path: string) => {
+      if (!microApp) return
+      const splat = path.startsWith('/') ? path.slice(1) : path
+      navigate(`${PREFIX_PATH}/${microApp.appKey}/${splat}`)
     }
 
     return (
       <MicroAppSelectPanel
         microAppKey={microApp?.appKey}
-        onChange={handleMicroAppChange}
+        microApp={microApp}
+        pagePath={pagePath}
+        onMicroAppChange={handleMicroAppChange}
+        onPageChange={handlePageChange}
         zusmodule={zusmodule}
       />
     )
@@ -61,18 +68,28 @@ export default function ZusModuleHostPage() {
 
     if (status === 'error') {
       return (
-        <Alert type="error" message={errorMessage || "未知异常"} showIcon style={{ marginBottom: 16 }} />
+        <Alert type="error" title={errorMessage || "未知异常"} showIcon style={{ marginBottom: 16 }} />
       )
     }
 
     if (zusmodule && microApp) {
       return (
-        <div style={{ border: '1px dashed #666' }}>
+        <div
+          className="zusmodule-mount-wrap"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: 480,
+            height: '70vh',
+            border: '1px dashed #666',
+          }}
+        >
           <div
             ref={rootDomRef}
-            style={{ height: '100%' }}
+            style={{ flex: 1, minHeight: 0 }}
           />
-          <ZusModuleRunner basePath={`${PREFIX_PATH}/${microApp?.appKey}`}
+          <ZusModuleRunner
+            basePath={`${PREFIX_PATH}/${microApp.appKey}`}
             zusmodule={zusmodule}
             microApp={microApp}
             pagePath={pagePath}
@@ -93,19 +110,34 @@ export default function ZusModuleHostPage() {
 
 export function MicroAppSelectPanel({
   microAppKey,
-  onChange,
+  microApp,
+  pagePath,
+  onMicroAppChange,
+  onPageChange,
   zusmodule,
 }: {
-  microAppKey: string,
-  onChange: (microAppKey: string) => void,
-  zusmodule: ZusModule,
+  microAppKey?: string
+  microApp?: TAppMeta
+  pagePath?: string
+  onMicroAppChange: (microAppKey: string) => void
+  onPageChange: (path: string) => void
+  zusmodule: TZusModule
 }) {
-
   const microAppOptions =
-    zusmodule?.microApps.map((m) => ({
+    zusmodule.microApps.map((m) => ({
       label: `${m.displayName} (${m.appKey})`,
       value: m.appKey,
+    }))
+
+  const pageOptions =
+    microApp?.pageList.map((p) => ({
+      label: `${p.title} (${p.path})`,
+      value: p.path,
     })) ?? []
+
+  const currentPagePath = microApp
+    ? (pagePath ? `/${pagePath}` : microApp.indexPagePath)
+    : undefined
 
   return (
     <div style={{ paddingBottom: 12, marginBottom: 12, borderBottom: '1px solid var(--ant-color-border)' }}>
@@ -115,7 +147,15 @@ export function MicroAppSelectPanel({
         value={microAppKey}
         disabled={!zusmodule}
         options={microAppOptions}
-        onChange={onChange}
+        onChange={onMicroAppChange}
+      />
+      <span style={{ color: 'var(--ant-color-text-secondary)', marginLeft: 24, marginRight: 12 }}>选择页面: </span>
+      <Select
+        style={{ minWidth: 220 }}
+        value={currentPagePath}
+        disabled={!microApp || pageOptions.length === 0}
+        options={pageOptions}
+        onChange={onPageChange}
       />
     </div>
   )

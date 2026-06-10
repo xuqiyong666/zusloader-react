@@ -12,11 +12,11 @@ export default function App() {
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route
-          path="zus-module"
+          path="zusmodule"
           element={<ZusModuleHostPage />}
         />
         <Route
-          path="zus-module/:microAppKey/*"
+          path="zusmodule/:microAppKey/*"
           element={<ZusModuleHostPage />}
         />
         <Route path="*" element={<NotFoundPage />} />

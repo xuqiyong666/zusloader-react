@@ -1,15 +1,16 @@
 import React, { lazy, Suspense } from 'react'
 import { Button } from 'antd'
 import { useStore } from 'zustand/react'
-import type { MicroAppControlSDK, MicroAppMeta } from '@xuqiyong666/zusloader'
+import type { TAppMeta } from '@xuqiyong666/zusloader'
+import type { TControlSDK } from '@xuqiyong666/zusloader-react'
 import { MicroAppControlProvider, useMicroAppControl } from '@xuqiyong666/zusloader-react'
 
 import SampleApp1Page1 from './page1'
 import SampleApp1Page2 from './page2'
 
 export interface SampleApp1Props {
-  control: MicroAppControlSDK
-  microApp: MicroAppMeta
+  control: TControlSDK
+  microApp: TAppMeta
 }
 
 export function SampleApp1({ control, microApp }: SampleApp1Props) {
@@ -20,7 +21,7 @@ export function SampleApp1({ control, microApp }: SampleApp1Props) {
   )
 }
 
-function SampleApp1Content({ microApp }: { microApp: MicroAppMeta }) {
+function SampleApp1Content({ microApp }: { microApp: TAppMeta }) {
   const { store, actions } = useMicroAppControl()
   const pagePath = useStore(store, (s) => s.router.path)
   const pageParams = useStore(store, (s) => s.router.params)

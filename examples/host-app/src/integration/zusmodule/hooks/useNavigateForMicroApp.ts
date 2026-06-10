@@ -1,8 +1,8 @@
 import { useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import type { HostSDKBase } from '@xuqiyong666/zusloader'
+import type { THostSDKBase } from '@xuqiyong666/zusloader'
 
-export function useNavigateForMicroApp(): HostSDKBase['navigate'] {
+export function useNavigateForMicroApp(): THostSDKBase['navigate'] {
   const navigate = useNavigate()
 
   // 使用 ref 保证引用稳定，避免 useMemo 依赖问题

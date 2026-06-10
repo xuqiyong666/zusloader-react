@@ -32,7 +32,7 @@ export function AdminLayout() {
         type: 'host',
       },
       {
-        key: '/zus-module',
+        key: '/zusmodule',
         icon: <AppstoreOutlined />,
         label: '远程子模块',
         type: 'host',

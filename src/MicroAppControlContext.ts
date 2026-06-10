@@ -1,5 +1,5 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
-import type { MicroAppControlSDK } from '@xuqiyong666/zusloader'
+import type { TControlSDK } from './types/control';
 
-export const MicroAppControlContext = createContext<MicroAppControlSDK | null>(null)
+export const MicroAppControlContext = createContext<TControlSDK | null>(null);

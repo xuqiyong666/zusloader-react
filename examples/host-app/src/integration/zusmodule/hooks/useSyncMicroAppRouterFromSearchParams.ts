@@ -1,11 +1,12 @@
 import { useEffect, useRef, type MutableRefObject } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import type { MicroAppControlSDK, MicroAppMeta } from '@xuqiyong666/zusloader';
+import type { TAppMeta } from '@xuqiyong666/zusloader';
+import type { TControlSDK } from '@xuqiyong666/zusloader-react';
 import { shallowEqual, urlToRouterPayload } from '../utils/router';
 
 export interface UseSyncMicroAppRouterFromSearchParamsOptions {
-  control: MicroAppControlSDK;
-  microApp: MicroAppMeta;
+  control: TControlSDK;
+  microApp: TAppMeta;
   pagePath?: string;
 }
 

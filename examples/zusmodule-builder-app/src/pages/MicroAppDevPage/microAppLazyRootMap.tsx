@@ -1,7 +1,8 @@
 import { lazy, type ComponentType, type LazyExoticComponent } from 'react'
-import type { MicroAppControlSDK, MicroAppMeta } from '@xuqiyong666/zusloader'
+import type { TAppMeta } from '@xuqiyong666/zusloader'
+import type { TControlSDK } from '@xuqiyong666/zusloader-react'
 
-type MicroAppRootProps = { control: MicroAppControlSDK; microApp: MicroAppMeta }
+type MicroAppRootProps = { control: TControlSDK; microApp: TAppMeta }
 
 export type MicroAppLazyRoot = LazyExoticComponent<
   ComponentType<MicroAppRootProps>
