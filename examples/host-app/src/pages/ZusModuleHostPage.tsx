@@ -19,7 +19,7 @@ export default function ZusModuleHostPage() {
     '*'?: string
   }>()
 
-  const { status, zusmodule, errorMessage } = useZusModule({
+  const { isLoading, zusmodule, error } = useZusModule({
     zusmodule_manifest_url: DEFAULT_MANIFEST_URL
   });
 
@@ -60,15 +60,15 @@ export default function ZusModuleHostPage() {
   }
 
   const renderContent = (): any => {
-    if (status === 'loading') {
+    if (isLoading) {
       return (
         <Spin style={{ height: '100%' }} spinning={true}></Spin>
       )
     }
 
-    if (status === 'error') {
+    if (error) {
       return (
-        <Alert type="error" title={errorMessage || "未知异常"} showIcon style={{ marginBottom: 16 }} />
+        <Alert type="error" title={error.message || "未知异常"} showIcon style={{ marginBottom: 16 }} />
       )
     }
 

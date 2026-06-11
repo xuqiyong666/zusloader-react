@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 
+import { TErrorWithCause } from './errors'
 import { useZusModule } from './useZusModule'
 import type {
   TUseZusModuleAndMicroAppOptions,
@@ -15,17 +16,40 @@ export function useZusModuleAndMicroApp(
 ): TUseZusModuleAndMicroAppResult {
   const { microAppKey, ...zusModuleOptions } = options
 
-  const { status, zusmodule, errorMessage } = useZusModule(zusModuleOptions)
+  const { isLoading, zusmodule, error: moduleError } = useZusModule(zusModuleOptions)
 
   const microApp = useMemo(() => {
     if (!zusmodule) return null
+    if (!microAppKey) return null
     return zusmodule.microApps.find((m) => m.appKey === microAppKey) || null
   }, [zusmodule, microAppKey])
 
+  const error = useMemo(() => {
+    if (isLoading) return null
+
+    if (moduleError) {
+      return moduleError
+    }
+
+    if (!zusmodule) {
+      return new TErrorWithCause('ZusModule 加载失败')
+    }
+
+    if (!microAppKey) {
+      return new TErrorWithCause('未设置 microAppKey')
+    }
+
+    if (!microApp) {
+      return new TErrorWithCause(`MicroApp 未找到: appKey「${microAppKey}」不存在`)
+    }
+
+    return null
+  }, [moduleError, isLoading, zusmodule, microAppKey, microApp])
+
   return {
-    status,
+    isLoading,
     zusmodule,
     microApp,
-    errorMessage: errorMessage || (microApp ? null : `未找到 appKey 为「${microAppKey}」的 MicroApp`),
+    error,
   }
 }

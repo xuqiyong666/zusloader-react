@@ -1,7 +1,6 @@
 export type {
   TAppLanguage,
   TControlActions,
-  TControlContextValue,
   TControlSDK,
   TControlState,
   TExtraActions,
@@ -12,12 +11,11 @@ export type {
   TThemeMode,
 } from './control';
 
+export type { TErrorWithCause } from './error';
+
 export type {
   TUseZusModuleAndMicroAppOptions,
   TUseZusModuleAndMicroAppResult,
   TUseZusModuleOptions,
   TUseZusModuleResult,
-  TZusModuleStatus,
 } from './zusmodule';
-
-export type { TManifest } from './manifest';

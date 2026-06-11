@@ -1,15 +1,15 @@
 import type { TAppMeta, TZusModule } from '@xuqiyong666/zusloader';
 
-export type TZusModuleStatus = 'loading' | 'ready' | 'error';
+import type { TErrorWithCause } from './error';
 
 export interface TUseZusModuleOptions {
   zusmodule_manifest_url: string;
 }
 
 export interface TUseZusModuleResult {
-  status: TZusModuleStatus;
+  isLoading: boolean;
   zusmodule: TZusModule | null;
-  errorMessage: string | null;
+  error: TErrorWithCause | null;
 }
 
 export interface TUseZusModuleAndMicroAppOptions extends TUseZusModuleOptions {
@@ -18,8 +18,8 @@ export interface TUseZusModuleAndMicroAppOptions extends TUseZusModuleOptions {
 }
 
 export interface TUseZusModuleAndMicroAppResult {
-  status: TZusModuleStatus;
+  isLoading: boolean;
   zusmodule: TZusModule | null;
   microApp: TAppMeta | null;
-  errorMessage: string | null;
+  error: TErrorWithCause | null;
 }

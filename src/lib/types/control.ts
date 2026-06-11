@@ -30,10 +30,10 @@ export interface TRootLayoutActions {
 }
 
 /** 自定义扩展 state */
-export interface TExtraState extends Record<string, unknown> {}
+export interface TExtraState extends Record<string, unknown> { }
 
 /** 自定义扩展 actions */
-export interface TExtraActions extends Record<string, unknown> {}
+export interface TExtraActions extends Record<string, unknown> { }
 
 type StandardExtraState<TState extends TExtraState> = TPreferenceState & TState;
 
@@ -51,9 +51,7 @@ export type TControlActions<TActions extends TExtraActions = TExtraActions> = Or
 export type TControlSDK<
   TState extends TExtraState = TExtraState,
   TActions extends TExtraActions = TExtraActions,
-> = OriginSDK<StandardExtraState<TState>, StandardExtraActions<TActions>>;
-
-export type TControlContextValue<
-  TState extends TExtraState = TExtraState,
-  TActions extends TExtraActions = TExtraActions,
-> = TControlSDK<TState, TActions>;
+> = OriginSDK<
+  StandardExtraState<TState>,
+  StandardExtraActions<TActions>
+>;
