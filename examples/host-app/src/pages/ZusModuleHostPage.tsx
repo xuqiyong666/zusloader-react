@@ -1,8 +1,8 @@
 import { Alert, Select, Spin } from 'antd';
 
 import { useParams } from 'react-router-dom';
-import { useZusModule } from '@xuqiyong666/zusloader-react';
-import type { TAppMeta, TZusModule } from '@xuqiyong666/zusloader';
+import { useZusModule } from 'zusloader-react';
+import type { TAppMeta, TReactZusModule } from 'zusloader-react';
 import ZusModuleRunner from '../integration/zusmodule/ZusModuleRunner';
 import { useNavigateForMicroApp } from '../integration/zusmodule/hooks/useNavigateForMicroApp';
 import { useMemo, useRef } from 'react';
@@ -121,7 +121,7 @@ export function MicroAppSelectPanel({
   pagePath?: string
   onMicroAppChange: (microAppKey: string) => void
   onPageChange: (path: string) => void
-  zusmodule: TZusModule
+  zusmodule: TReactZusModule
 }) {
   const microAppOptions =
     zusmodule.microApps.map((m) => ({

@@ -6,16 +6,16 @@ import { createStore } from 'zustand/vanilla'
 import { useStore } from 'zustand/react'
 
 import { getMicroAppByKey } from '../../metadata.ts'
+import { DEFAULT_APP_LANGUAGE } from '../../utils/locale.ts'
 
-import type { TPageMeta, TStatus } from '@xuqiyong666/zusloader'
-import type { TControlSDK, TControlState } from '@xuqiyong666/zusloader-react'
+import type { TPageMeta, TReactControlState } from 'zusloader-react'
 import {
   MicroAppControlProvider,
   useMicroAppControl,
-} from '@xuqiyong666/zusloader-react'
+} from 'zusloader-react'
 
+import { createDevMicroAppControl } from './createDevMicroAppControl.ts'
 import { MicroAppDevContentPanel } from './MicroAppDevContentPanel.tsx'
-import { useStateRef } from '../../hooks/useStateRef.ts'
 import { useNavigateForMicroApp } from '../../hooks/useNavigateForMicroApp.ts'
 
 const { Header, Sider, Content } = Layout
@@ -64,39 +64,20 @@ export function MicroAppDevPage() {
       return null
     }
 
-    const store = createStore<TControlState>(() => ({
+    const store = createStore<TReactControlState>(() => ({
       router: {
         path: microApp.indexPagePath,
         params: {},
       },
       basePath,
-      status: 'idle' as const
+      status: 'idle' as const,
+      errorMsg: undefined,
+      themeMode: 'light',
+      timezone: 'Asia/Shanghai',
+      language: DEFAULT_APP_LANGUAGE,
     }))
 
-    const hostNavigate = (nextPath, nextParams = {}) => {
-      navigate(nextPath, nextParams)
-    }
-    const navigateInApp = (nextPath, nextParams = {}) => {
-      const normalizedPath = nextPath.startsWith('/') ? nextPath : `/${nextPath}`
-      navigate(`${basePath}${normalizedPath}`, nextParams)
-    }
-    const setStatus = (status: TStatus) => {
-      store.setState((s) => ({ ...s, status }))
-    }
-    const setErrorMsg = (message) => {
-      store.setState((s) => ({ ...s, errorMsg: message }))
-    }
-    const control: TControlSDK = {
-      store,
-      actions: {
-        hostNavigate,
-        navigate: navigateInApp,
-        setStatus,
-        setErrorMsg,
-      },
-    }
-
-    return control
+    return createDevMicroAppControl({ store, navigate, basePath })
   }, [microApp, navigate, basePath])
 
   useEffect(() => {

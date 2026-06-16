@@ -1,6 +1,6 @@
 import { Suspense, useLayoutEffect, type ReactNode } from 'react'
-import type { TAppMeta } from '@xuqiyong666/zusloader'
-import { useMicroAppControl } from '@xuqiyong666/zusloader-react'
+import type { TAppMeta } from 'zusloader-react'
+import { useMicroAppControl } from 'zusloader-react'
 
 import type { MicroAppLazyRoot } from './microAppLazyRootMap.tsx'
 import { LazyLoadingFallback } from './LazyLoadingFallback.tsx'

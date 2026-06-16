@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react"
-import { useMicroAppControl } from "@xuqiyong666/zusloader-react"
+import { useMicroAppControl } from "zusloader-react"
 
 /** `Suspense` fallback 挂载期间表示入口代码仍在加载 */
 export function LazyLoadingFallback() {

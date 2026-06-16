@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { createStore } from 'zustand/vanilla';
-import type { TAppMeta, TZusModule } from '@xuqiyong666/zusloader';
-import type { TControlSDK, TControlState, TExtraState } from '@xuqiyong666/zusloader-react';
+import type { TAppMeta, TReactControlSDK, TReactControlState, TReactZusModule } from 'zusloader-react';
 import { createControlForMicroApp, type MicroAppHostStateRef } from '../createControlForMicroApp';
 import { DEFAULT_APP_LANGUAGE } from '../microAppControl';
 import { useNavigateForMicroApp } from './useNavigateForMicroApp';
@@ -9,7 +8,7 @@ import { useStateRef } from './useStateRef';
 
 export interface UseControlForMicroAppOptions {
   microApp: TAppMeta;
-  zusmodule: TZusModule;
+  zusmodule: TReactZusModule;
   basePath: string;
   pagePath?: string;
 }
@@ -20,7 +19,7 @@ export function useControlForMicroApp({
   basePath,
   pagePath,
 }: UseControlForMicroAppOptions): {
-  control: TControlSDK;
+  control: TReactControlSDK;
   stateRef: ReturnType<typeof useStateRef<MicroAppHostStateRef>>;
 } {
   const navigate = useNavigateForMicroApp();
@@ -33,7 +32,7 @@ export function useControlForMicroApp({
 
   const store = useMemo(
     () =>
-      createStore<TControlState<TExtraState>>(() => ({
+      createStore<TReactControlState>(() => ({
         router: {
           path: microApp.indexPagePath,
           params: {},
@@ -53,7 +52,7 @@ export function useControlForMicroApp({
     [store, stateRef],
   );
 
-  const control = useMemo<TControlSDK>(
+  const control = useMemo<TReactControlSDK>(
     () => ({ store, actions }),
     [store, actions],
   );

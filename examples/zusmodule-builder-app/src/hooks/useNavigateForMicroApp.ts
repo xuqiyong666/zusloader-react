@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import type { THostSDKBase } from '@xuqiyong666/zusloader'
+import type { THostSDKBase } from 'zusloader-react'
 
 export function useNavigateForMicroApp(): THostSDKBase['navigate'] {
   const navigate = useNavigate()

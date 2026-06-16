@@ -1,6 +1,6 @@
 {
-  "name": "@xuqiyong666/zusloader-react",
-  "version": "1.0.0",
+  "name": "zusloader-react",
+  "version": "1.1.0",
   "description": "zusloader 的 React 适配层，提供控制上下文、Hooks 与宿主集成能力。",
   "repository": {
     "type": "git",
@@ -9,7 +9,9 @@
   "license": "ISC",
   "author": "xuqiyong666",
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "./src/lib/types/zusloader-augmentation.ts"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -27,18 +29,19 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@xuqiyong666/zusloader": "1.0.0",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
+    "zusloader": "1.0.0",
     "zustand": ">=4.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.2",
-    "@xuqiyong666/zusloader": "file:../zusloader",
+    "@types/react-dom": "^19.2.3",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "tsup": "^8.5.1",
     "typescript": "~5.9.3",
+    "zusloader": "file:../zusloader",
     "zustand": "^5.0.9"
   }
 }

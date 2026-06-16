@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.1.1",
-    "@xuqiyong666/zusloader": "file:../../../zusloader",
-    "@xuqiyong666/zusloader-react": "file:../../../zusloader-react",
+    "zusloader": "file:../../../zusloader",
+    "zusloader-react": "file:../../../zusloader-react",
     "antd": "^6.2.1",
     "axios": "^1.13.2",
     "react": "19.2.5",

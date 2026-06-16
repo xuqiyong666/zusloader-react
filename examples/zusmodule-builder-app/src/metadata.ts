@@ -1,6 +1,6 @@
 /** 开发壳使用的 MicroApp 登记表（与构建 manifest 可后续对齐） */
 
-import type { TAppMeta } from '@xuqiyong666/zusloader'
+import type { TAppMeta } from 'zusloader-react'
 
 export const microApps: TAppMeta[] = [
   {

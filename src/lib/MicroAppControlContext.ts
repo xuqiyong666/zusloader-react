@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-import type { TControlSDK } from './types/control';
+import type { TReactControlSDK } from './types/react-control';
 
-export const MicroAppControlContext = createContext<TControlSDK | null>(null);
+export const MicroAppControlContext = createContext<TReactControlSDK | null>(null);

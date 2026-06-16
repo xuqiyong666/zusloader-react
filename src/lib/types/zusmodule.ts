@@ -1,6 +1,7 @@
-import type { TAppMeta, TZusModule } from '@xuqiyong666/zusloader';
+import type { TAppMeta } from 'zusloader';
 
 import type { TErrorWithCause } from './error';
+import type { TReactZusModule } from './react-zusmodule';
 
 export interface TUseZusModuleOptions {
   zusmodule_manifest_url: string;
@@ -8,7 +9,7 @@ export interface TUseZusModuleOptions {
 
 export interface TUseZusModuleResult {
   isLoading: boolean;
-  zusmodule: TZusModule | null;
+  zusmodule: TReactZusModule | null;
   error: TErrorWithCause | null;
 }
 
@@ -19,7 +20,7 @@ export interface TUseZusModuleAndMicroAppOptions extends TUseZusModuleOptions {
 
 export interface TUseZusModuleAndMicroAppResult {
   isLoading: boolean;
-  zusmodule: TZusModule | null;
+  zusmodule: TReactZusModule | null;
   microApp: TAppMeta | null;
   error: TErrorWithCause | null;
 }

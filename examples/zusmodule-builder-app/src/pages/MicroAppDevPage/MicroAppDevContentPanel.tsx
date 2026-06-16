@@ -1,8 +1,8 @@
 import { Alert, Spin } from 'antd'
 import { useStore } from 'zustand/react'
 
-import type { TAppMeta } from '@xuqiyong666/zusloader'
-import { useMicroAppControl } from '@xuqiyong666/zusloader-react'
+import type { TAppMeta } from 'zusloader-react'
+import { useMicroAppControl } from 'zusloader-react'
 
 import { MicroAppPlayer } from './MicroAppPlayer.tsx'
 import { MICRO_APP_LAZY_ROOT_MAP } from './microAppLazyRootMap.tsx'

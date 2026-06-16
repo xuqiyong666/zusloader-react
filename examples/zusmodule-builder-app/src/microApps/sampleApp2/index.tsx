@@ -1,15 +1,14 @@
 import React, { lazy, Suspense } from 'react'
 import { Button } from 'antd'
 import { useStore } from 'zustand/react'
-import type { TAppMeta } from '@xuqiyong666/zusloader'
-import type { TControlSDK } from '@xuqiyong666/zusloader-react'
-import { MicroAppControlProvider, useMicroAppControl } from '@xuqiyong666/zusloader-react'
+import type { TAppMeta, TReactControlSDK } from 'zusloader-react'
+import { MicroAppControlProvider, useMicroAppControl } from 'zusloader-react'
 
 import SampleApp2Page1 from './page1'
 import SampleApp2Page2 from './page2'
 
 export interface SampleApp2Props {
-  control: TControlSDK
+  control: TReactControlSDK
   microApp: TAppMeta
 }
 

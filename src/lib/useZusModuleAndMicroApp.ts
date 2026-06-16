@@ -1,5 +1,7 @@
 import { useMemo } from 'react'
 
+import type { TAppMeta } from 'zusloader'
+
 import { TErrorWithCause } from './errors'
 import { useZusModule } from './useZusModule'
 import type {
@@ -21,7 +23,7 @@ export function useZusModuleAndMicroApp(
   const microApp = useMemo(() => {
     if (!zusmodule) return null
     if (!microAppKey) return null
-    return zusmodule.microApps.find((m) => m.appKey === microAppKey) || null
+    return zusmodule.microApps.find((m: TAppMeta) => m.appKey === microAppKey) || null
   }, [zusmodule, microAppKey])
 
   const error = useMemo(() => {

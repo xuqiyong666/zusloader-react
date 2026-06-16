@@ -1,6 +1,6 @@
 
 import { Button } from "antd"
-import { useMicroAppControl } from "@xuqiyong666/zusloader-react"
+import { useMicroAppControl } from "zusloader-react"
 import { useStore } from "zustand"
 
 export const SampleApp1Page2 = () => {

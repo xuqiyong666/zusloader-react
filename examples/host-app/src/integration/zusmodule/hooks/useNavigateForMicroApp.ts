@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import type { THostSDKBase } from '@xuqiyong666/zusloader'
+import type { THostSDKBase } from 'zusloader-react'
 
 export function useNavigateForMicroApp(): THostSDKBase['navigate'] {
   const navigate = useNavigate()
@@ -9,7 +9,7 @@ export function useNavigateForMicroApp(): THostSDKBase['navigate'] {
   const navigateRef = useRef(navigate)
   navigateRef.current = navigate
 
-  // 返回符合 HostSDKBase.navigate 签名的稳定函数
+  // 返回符合 THostSDKBase.navigate 签名的稳定函数
   return useCallback((path: string, params?: Record<string, string>, replace?: boolean) => {
     const queryString = params
       ? '?' + new URLSearchParams(params).toString()

@@ -1,12 +1,11 @@
 import type { MutableRefObject } from 'react';
 import type { StoreApi } from 'zustand/vanilla';
-import type { TAppMeta, THostSDKBase } from '@xuqiyong666/zusloader';
 import type {
-  TControlActions,
-  TControlState,
-  TExtraActions,
-  TExtraState,
-} from '@xuqiyong666/zusloader-react';
+  TAppMeta,
+  THostSDKBase,
+  TReactControlActions,
+  TReactControlState,
+} from 'zusloader-react';
 
 import { resolveAppLanguage, type AppLanguage } from './microAppControl';
 
@@ -19,9 +18,9 @@ export type MicroAppHostStateRef = {
 };
 
 export function createControlForMicroApp(options: {
-  store: StoreApi<TControlState<TExtraState>>;
+  store: StoreApi<TReactControlState>;
   stateRef: MutableRefObject<MicroAppHostStateRef>;
-}): TControlActions<TExtraActions> {
+}): TReactControlActions {
   const { store, stateRef } = options;
   const rootClassName = 'zusmodule-example-host-root';
   const rootStyle = {
