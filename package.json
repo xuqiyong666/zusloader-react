@@ -1,6 +1,6 @@
 {
   "name": "zusloader-react",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "zusloader 的 React 适配层，提供控制上下文、Hooks 与宿主集成能力。",
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "zusloader": "1.0.0",
+    "zusloader": "1.1.0",
     "zustand": ">=4.0.0"
   },
   "devDependencies": {
