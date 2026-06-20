@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AdminLayout } from './layouts/AdminLayout.tsx'
 import { DashboardPage } from './pages/DashboardPage.tsx'
 import { NotFoundPage } from './pages/NotFoundPage.tsx'
-import ZusModuleHostPage from './pages/ZusModuleHostPage.tsx'
+import ZusModuleHostPage from './pages/zusmoduleHost/index.tsx'
 
 export default function App() {
   return (

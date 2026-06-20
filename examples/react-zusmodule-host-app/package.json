@@ -1,5 +1,5 @@
 {
-  "name": "zusloader-react-host-app",
+  "name": "react-zusmodule-host-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,13 +11,14 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.1.1",
-    "zusloader": "file:../../../zusloader",
-    "zusloader-react": "file:../../../zusloader-react",
     "antd": "^6.2.1",
     "axios": "^1.13.2",
+    "chakbox-ui": "^1.0.0",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "react-router-dom": "^7.0.0",
+    "zusloader": "file:../../../zusloader",
+    "zusloader-react": "file:../../../zusloader-react",
     "zustand": "^5.0.9"
   },
   "devDependencies": {

@@ -58,7 +58,7 @@ export function AdminLayout() {
   )
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ minHeight: '100vh', height: '100vh' }}>
       <Sider
         breakpoint="lg"
         collapsedWidth={64}
@@ -79,7 +79,7 @@ export function AdminLayout() {
             borderBottom: `1px solid ${token.colorBorderSecondary}`,
           }}
         >
-          XXX Hub
+          React Host
         </div>
         <Menu
           mode="inline"
@@ -96,7 +96,7 @@ export function AdminLayout() {
           }}
         />
       </Sider>
-      <Layout>
+      <Layout style={{ flex: 1, minHeight: 0 }}>
         <Header
           style={{
             paddingInline: token.paddingLG,
@@ -104,6 +104,7 @@ export function AdminLayout() {
             borderBottom: `1px solid ${token.colorBorderSecondary}`,
             lineHeight: '64px',
             height: 64,
+            flexShrink: 0,
           }}
         >
           主应用 · 宿主
@@ -114,7 +115,11 @@ export function AdminLayout() {
             padding: token.paddingLG,
             background: token.colorBgContainer,
             borderRadius: token.borderRadiusLG,
-            minHeight: 280,
+            flex: 1,
+            minHeight: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
           }}
         >
           <Outlet />
